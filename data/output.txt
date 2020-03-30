@@ -1,0 +1,10 @@
+Train (East Loop) from MERIDIAN STN to COVE STN
+Train (East Loop) from COVE STN to PUNGGOL STN
+Walk 72.3m from PUNGGOL STN to PUNGGOL STN
+Bus (381) from PUNGGOL STN to BLK 303D
+Bus (386) from BLK 303D to PUNGGOL SEC/BLK 601B
+Bus (386) from PUNGGOL SEC/BLK 601B to PUNGGOL SEC SCH
+Bus (386) from PUNGGOL SEC SCH to BLK 672A
+Walk 88.9m from BLK 672A to BLK 672B
+Stops:8
+Distance: 2.88km

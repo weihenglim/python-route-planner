@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+  <script>
+    L_NO_TOUCH = false;
+    L_DISABLE_3D = false;
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!--    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+  <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <style>
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+  </style>
+
+  <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    #map_b2659bcdb5884213a35c795aa1b415cc {
+      position: relative;
+      width: 60.0%;
+      height: 100.0%;
+      left: 30%;
+      top: 0.0%;
+    }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-dvf/0.3.0/leaflet-dvf.markers.min.js"></script>
+  <title>Project 08</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse" height="50px">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="container">
+          <img src=" {{url_for('static', filename='img/Capture.JPG')}}" height="150" width="140px">
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="sidenav container">
+      <form method="POST" autocomplete="off">
+
+        <div class="container">
+          <h4>Starting Point</h4>
+          <select class="input-group" name="start">
+              {% for stations in data %}
+              <option value="{{stations}}">{{stations}}</option>
+              {%endfor%}
+          </select>
+        </div>
+
+        <br><br>
+
+        <div class="container">
+          <h4>Ending Point</h4>
+          <div class=''>
+            <div class='input-group'>
+              <input id="autocomplete" class='form-control' type='text' name='end' placeholder='Enter Address/Bus Description' />
+            </div>
+          </div>
+        </div>
+
+        <br><br>
+        <div class="container">
+          <h4>Route Transfer Type</h4>
+
+          <select class="input-group" name="option">
+            {% for option in options %}
+            <option value="{{option}}">{{option}}</option>
+            {%endfor%}
+
+          </select>
+
+
+        </div>
+
+        <br><br>
+        <div class="container">
+          <button class="btn btn-primary btn-lg" name="Generate" type="submit">Generate</button>
+
+        </div>
+
+      </form>
+
+      <br><br>
+
+    <div class="container">
+      <h4>Map Indicator:</h4>
+      <a class="active">1. Bus Stops </a><i class="material-icons" style="font-size:36px; color:Blue">location_on</i>
+      <br>
+      <a class="active">2. HDB Indicator (Red) </a><i class="material-icons" style="font-size:36px; color:Red">lens</i>
+      <br>
+      <a class="active">3. Bus Stop Indicator (Blue) </a><i class="material-icons" style="font-size:36px; color:Blue">lens</i>
+      <br>
+      <a class="active" >4. LRT Route (Black Line) </a><i class="material-icons" style="font-size:36px; color:Black">minimize</i>
+      <br>
+      <a class="active">5. Bus Route (Blue Line) </a><i class="material-icons" style="font-size:36px; color:Blue">minimize</i>
+      <br>
+      <a class="active">6. Walking Route (Orange Line) </a><i class="material-icons" style="font-size:36px; color:Orange">minimize</i>
+    </div>
+
+  </div>
+
+
+
+
+{%block map%}
+
+{%endblock%}
+
+
+
+
+</body>
+
+
+<style>
+  .navbar-inverse {
+    background-color: #000000;
+    border-color: #080808;
+  }
+
+  .navbar {
+    min-height: 120px;
+  }
+
+  .navbar-brand {
+    padding: 0 15px;
+    height: 120px;
+    line-height: 120px;
+  }
+
+  .navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-nav>li>a {
+      /* (80px - line-height of 27px) / 2 = 26.5px */
+      padding-top: 26.5px;
+      padding-bottom: 26.5px;
+      line-height: 120px;
+    }
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 350px;
+    position: absolute;
+    overflow-x: hidden;
+  }
+
+  .ul {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }
+
+  .ul:hover {
+    opacity: 0.7;
+  }
+
+
+</style>
+
+
+<script>
+  function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+/*An array containing data*/
+var data_house = {{data1|tojson}};
+
+autocomplete(document.getElementById("autocomplete"), data_house);
+</script>
+
